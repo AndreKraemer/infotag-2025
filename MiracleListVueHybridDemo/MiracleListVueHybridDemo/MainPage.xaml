@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MiracleListVueHybridDemo.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <ScrollView>
+
+        <Grid RowDefinitions="auto, auto, *" ColumnDefinitions="*,auto" ColumnSpacing="8" RowSpacing="8">
+
+            <Entry
+                x:Name="messageText"
+                Grid.Column="0"
+                Placeholder="Bitte Nachricht eintragen" />
+
+            <Button
+                Clicked="OnSendMessageButtonClicked"
+                Grid.Column="1"
+                Text="Senden" />
+
+            <Button
+                Grid.Row="1"
+                Clicked="OnExportCurrentCategory"
+                Text="Aktuelle Kategorie exportieren"/>
+            <Button
+                Grid.Row="1"
+                Grid.Column="1"
+                Clicked="OnExportAllTasks"
+                Text="Alle Aufgaben exportieren"/>
+
+
+            <HybridWebView
+                x:Name="hybridWebView"
+                Grid.Row="2"
+                Grid.ColumnSpan="2"
+                RawMessageReceived="OnHybridWebViewRawMessageReceived"
+                WebResourceRequested="OnHybridWebViewWebResourceRequested"/>
+        </Grid>
+    </ScrollView>
+
+</ContentPage>

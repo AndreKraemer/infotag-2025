@@ -1,0 +1,23 @@
+{
+ "compilerOptions": {
+  "types": [
+    // ... your other types
+    "node",
+    // ... für Jest
+    "vite/client", "@types/jest"
+  ]
+ },
+ 
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.config.json"
+    },
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.vitest.json"
+    }
+  ]
+}
