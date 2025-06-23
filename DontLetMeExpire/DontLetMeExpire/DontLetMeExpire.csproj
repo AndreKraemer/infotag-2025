@@ -40,8 +40,8 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(TargetFramework)'=='net10.0-ios'">
-   <CodesignKey>Apple Development: André Krämer (GM64FQT723)</CodesignKey>
-   <CodesignProvision>VS: WildCard Development</CodesignProvision>
+		<CodesignKey>Apple Development: André Krämer (GM64FQT723)</CodesignKey>
+		<CodesignProvision>VS: WildCard Development</CodesignProvision>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -76,42 +76,45 @@
 	</ItemGroup>
 
 	<ItemGroup>
-   <Compile Update="Resources\Strings\AppResources.Designer.cs">
-     <DesignTime>True</DesignTime>
-     <AutoGen>True</AutoGen>
-     <DependentUpon>AppResources.resx</DependentUpon>
-   </Compile>
+		<Compile Update="Resources\Strings\AppResources.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>AppResources.resx</DependentUpon>
+		</Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-   <EmbeddedResource Update="Resources\Strings\AppResources.resx">
-     <Generator>PublicResXFileCodeGenerator</Generator>
-     <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
-   </EmbeddedResource>
+		<EmbeddedResource Update="Resources\Strings\AppResources.resx">
+			<Generator>PublicResXFileCodeGenerator</Generator>
+			<LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
 	</ItemGroup>
 
 	<ItemGroup>
-   <MauiXaml Update="AppWindow.xaml">
-     <Generator>MSBuild:Compile</Generator>
-   </MauiXaml>
-   <MauiXaml Update="Controls\DashboardTile.xaml">
-     <Generator>MSBuild:Compile</Generator>
-   </MauiXaml>
-   <MauiXaml Update="Resources\Styles\AppStyles.xaml">
-     <Generator>MSBuild:Compile</Generator>
-   </MauiXaml>
-   <MauiXaml Update="Resources\Styles\MaterialSymbolsRounded.xaml">
-     <Generator>MSBuild:Compile</Generator>
-   </MauiXaml>
-   <MauiXaml Update="Views\ItemPage.xaml">
-     <Generator>MSBuild:Compile</Generator>
-   </MauiXaml>
-   <MauiXaml Update="Views\ItemsPage.xaml">
-     <Generator>MSBuild:Compile</Generator>
-   </MauiXaml>
-   <MauiXaml Update="Views\SettingsPage.xaml">
-     <Generator>MSBuild:Compile</Generator>
-   </MauiXaml>
+		<MauiXaml Update="AppWindow.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Controls\DashboardTile.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Resources\Styles\AppStyles.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Resources\Styles\MaterialSymbolsRounded.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\ItemPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\ItemsPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Views\SettingsPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 	</ItemGroup>
-
+	<PropertyGroup>
+		<DefineConstants>$(DefineConstants);MauiAllowImplicitXmlnsDeclaration</DefineConstants>
+		<EnablePreviewFeatures>true</EnablePreviewFeatures>
+	</PropertyGroup>
 </Project>

@@ -1,15 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
     x:Class="DontLetMeExpire.MainPage"
-    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:controls="clr-namespace:DontLetMeExpire.Controls"
-    xmlns:models="clr-namespace:DontLetMeExpire.Models"
-    xmlns:strings="clr-namespace:DontLetMeExpire.Resources.Strings"
-    xmlns:syncfusion="http://schemas.syncfusion.com/maui/toolkit"
-    xmlns:viewModels="clr-namespace:DontLetMeExpire.ViewModels"
     Padding="{StaticResource ThicknessM}"
-    x:DataType="viewModels:MainViewModel"
+    x:DataType="MainViewModel"
     BackgroundColor="{AppThemeBinding Light={StaticResource PrimaryLightLightest},
                                       Dark={StaticResource PrimaryDarkDarkest}}">
     <ScrollView>
@@ -19,7 +12,7 @@
             RowDefinitions="100,100,200,auto,*,48"
             RowSpacing="{StaticResource SizeM}">
 
-            <controls:DashboardTile
+            <DashboardTile
                 Grid.Row="0"
                 Grid.Column="0"
                 BorderColor="{AppThemeBinding Light={StaticResource PrimaryLightLight},
@@ -32,10 +25,10 @@
                 IconColor="{AppThemeBinding Light={StaticResource PrimaryLightDarkest},
                                             Dark={StaticResource White}}"
                 IsLoading="{Binding IsLoading}"
-                Text="{x:Static strings:AppResources.MyStock}"
+                Text="{x:Static AppResources.MyStock}"
                 TextColor="{AppThemeBinding Light={StaticResource PrimaryLightDark},
                                             Dark={StaticResource PrimaryDarkLightest}}" />
-            <controls:DashboardTile
+            <DashboardTile
                 Grid.Row="0"
                 Grid.Column="1"
                 BorderColor="{AppThemeBinding Light={StaticResource SuccessDark},
@@ -48,10 +41,10 @@
                 IconColor="{AppThemeBinding Light={StaticResource SuccessDark},
                                             Dark={StaticResource Success}}"
                 IsLoading="{Binding IsLoading}"
-                Text="{x:Static strings:AppResources.ExpiringSoon}"
+                Text="{x:Static AppResources.ExpiringSoon}"
                 TextColor="{AppThemeBinding Light={StaticResource PrimaryLightDark},
                                             Dark={StaticResource PrimaryDarkLightest}}" />
-            <controls:DashboardTile
+            <DashboardTile
                 Grid.Row="1"
                 Grid.Column="0"
                 BorderColor="{AppThemeBinding Light={StaticResource WarningDark},
@@ -64,11 +57,11 @@
                 IconColor="{AppThemeBinding Light={StaticResource WarningDark},
                                             Dark={StaticResource Warning}}"
                 IsLoading="{Binding IsLoading}"
-                Text="{x:Static strings:AppResources.ExpiresToday}"
+                Text="{x:Static AppResources.ExpiresToday}"
                 TextColor="{AppThemeBinding Light={StaticResource PrimaryLightDark},
                                             Dark={StaticResource PrimaryDarkLightest}}" />
 
-            <controls:DashboardTile
+            <DashboardTile
                 Grid.Row="1"
                 Grid.Column="1"
                 BorderColor="{AppThemeBinding Light={StaticResource ErrorDark},
@@ -81,11 +74,11 @@
                 IconColor="{AppThemeBinding Light={StaticResource ErrorDark},
                                             Dark={StaticResource Error}}"
                 IsLoading="{Binding IsLoading}"
-                Text="{x:Static strings:AppResources.Expired}"
+                Text="{x:Static AppResources.Expired}"
                 TextColor="{AppThemeBinding Light={StaticResource PrimaryLightDark},
                                             Dark={StaticResource PrimaryDarkLightest}}" />
 
-            <syncfusion:SfShimmer
+            <SfShimmer
                 Grid.Row="2"
                 Grid.ColumnSpan="2"
                 IsActive="{Binding IsLoading}"
@@ -103,24 +96,24 @@
                             Radius="4"
                             Offset="0,4" />
                     </Border.Shadow>
-                    <syncfusion:SfCircularChart>
-                        <syncfusion:SfCircularChart.Legend>
-                            <syncfusion:ChartLegend Placement="Right" />
-                        </syncfusion:SfCircularChart.Legend>
-                        <syncfusion:DoughnutSeries
+                    <SfCircularChart>
+                        <SfCircularChart.Legend>
+                            <ChartLegend Placement="Right" />
+                        </SfCircularChart.Legend>
+                        <DoughnutSeries
                             ItemsSource="{Binding ConditionsWithCount}"
                             XBindingPath="Condition"
                             YBindingPath="Count" />
-                    </syncfusion:SfCircularChart>
+                    </SfCircularChart>
                 </Border>
-            </syncfusion:SfShimmer>
+            </SfShimmer>
             <!--  Überschrift für Lagerorte  -->
             <Label
                 Grid.Row="3"
                 Grid.ColumnSpan="2"
                 FontSize="{StaticResource SizeL}"
                 StyleClass="mt-xs"
-                Text="{x:Static strings:AppResources.MyStorageLocations}" />
+                Text="{x:Static AppResources.MyStorageLocations}" />
             <!--  Platzhalter für Lagerorte  -->
             <VerticalStackLayout
                 Grid.Row="4"
@@ -129,17 +122,17 @@
                 BindableLayout.ItemsSource="{Binding StorageLocations}"
                 Spacing="{StaticResource SizeXS}">
                 <BindableLayout.ItemTemplate>
-                    <DataTemplate x:DataType="models:StorageLocationWithItemCount">
-                        <syncfusion:SfShimmer IsActive="{Binding Source={RelativeSource AncestorType={x:Type viewModels:MainViewModel}}, Path=IsLoading, x:DataType=viewModels:MainViewModel}">
+                    <DataTemplate x:DataType="StorageLocationWithItemCount">
+                        <SfShimmer IsActive="{Binding Source={RelativeSource AncestorType={x:Type MainViewModel}}, Path=IsLoading, x:DataType=MainViewModel}">
                             <!--  Darstellung eines Rahmens mit abgerundeten Ecken  -->
-                            <syncfusion:SfEffectsView TouchDownEffects="Ripple">
+                            <SfEffectsView TouchDownEffects="Ripple">
                                 <Border
                                     BackgroundColor="{AppThemeBinding Light={StaticResource White},
                                                                       Dark={StaticResource PrimaryDarkDark}}"
                                     StrokeShape="RoundRectangle 16"
                                     StrokeThickness="0">
                                     <Border.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:MainViewModel}}, Path=NavigateToLocationCommand}" CommandParameter="{Binding Id}" />
+                                        <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type MainViewModel}}, Path=NavigateToLocationCommand}" CommandParameter="{Binding Id}" />
                                     </Border.GestureRecognizers>
                                     <!--
                                         Definition des Schattens. Um natürlich zu wirken,
@@ -188,7 +181,7 @@
                                         <Label
                                             Grid.Row="1"
                                             Grid.Column="1"
-                                            Text="{Binding ItemCount, StringFormat={x:Static strings:AppResources.XItems}}"
+                                            Text="{Binding ItemCount, StringFormat={x:Static AppResources.XItems}}"
                                             TextColor="{AppThemeBinding Light={StaticResource PrimaryLightDark},
                                                                         Dark={StaticResource PrimaryDarkLightest}}" />
 
@@ -204,8 +197,8 @@
                                                                         Dark={StaticResource PrimaryDarkLightest}}" />
                                     </Grid>
                                 </Border>
-                            </syncfusion:SfEffectsView>
-                        </syncfusion:SfShimmer>
+                            </SfEffectsView>
+                        </SfShimmer>
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>
 
@@ -216,23 +209,23 @@
                             <Label
                                 Style="{StaticResource SubHeadline}"
                                 StyleClass="mt-xs"
-                                Text="{x:Static strings:AppResources.NoDataTitle}" />
-                            <Label Text="{x:Static strings:AppResources.NoDataDescription}" />
-                            <Label StyleClass="mt-xs, bold" Text="{x:Static strings:AppResources.GetStarted}" />
-                            <Label StyleClass="LinkLabel" Text="{x:Static strings:AppResources.StartWithSuggestedLocations}">
+                                Text="{x:Static AppResources.NoDataTitle}" />
+                            <Label Text="{x:Static AppResources.NoDataDescription}" />
+                            <Label StyleClass="mt-xs, bold" Text="{x:Static AppResources.GetStarted}" />
+                            <Label StyleClass="LinkLabel" Text="{x:Static AppResources.StartWithSuggestedLocations}">
                                 <Label.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:MainViewModel}}, Path=CreateSuggestedLocationsCommand}" />
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type MainViewModel}}, Path=CreateSuggestedLocationsCommand}" />
                                 </Label.GestureRecognizers>
                             </Label>
-                            <Label StyleClass="Small" Text="{x:Static strings:AppResources.SuggestedLocationsDescription}" />
-                            <Label StyleClass="mt-xs, LinkLabel" Text="{x:Static strings:AppResources.StartWithSuggestedLocationsAndStock}">
+                            <Label StyleClass="Small" Text="{x:Static AppResources.SuggestedLocationsDescription}" />
+                            <Label StyleClass="mt-xs, LinkLabel" Text="{x:Static AppResources.StartWithSuggestedLocationsAndStock}">
                                 <Label.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:MainViewModel}}, Path=CreateSuggestedLocationsAndStockCommand}" />
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type MainViewModel}}, Path=CreateSuggestedLocationsAndStockCommand}" />
                                 </Label.GestureRecognizers>
                             </Label>
-                            <Label StyleClass="Small" Text="{x:Static strings:AppResources.SuggestedLocationsAndStockDescription}" />
-                            <Label StyleClass="mt-xs, LinkLabel" Text="{x:Static strings:AppResources.CreateNewLocationLinkText}" />
-                            <Label StyleClass="Small" Text="{x:Static strings:AppResources.CreateNewLocationDescription}" />
+                            <Label StyleClass="Small" Text="{x:Static AppResources.SuggestedLocationsAndStockDescription}" />
+                            <Label StyleClass="mt-xs, LinkLabel" Text="{x:Static AppResources.CreateNewLocationLinkText}" />
+                            <Label StyleClass="Small" Text="{x:Static AppResources.CreateNewLocationDescription}" />
                         </VerticalStackLayout>
                     </DataTemplate>
                 </BindableLayout.EmptyViewTemplate>
@@ -241,12 +234,12 @@
                 Grid.Row="5"
                 Grid.Column="0"
                 Command="{Binding NavigateToAddItemCommand}"
-                Text="{x:Static strings:AppResources.AddEntry}" />
+                Text="{x:Static AppResources.AddEntry}" />
             <Button
                 Grid.Row="5"
                 Grid.Column="1"
                 Style="{StaticResource SecondaryButton}"
-                Text="{x:Static strings:AppResources.CreateNewLocation}" />
+                Text="{x:Static AppResources.CreateNewLocation}" />
         </Grid>
     </ScrollView>
 </ContentPage>
