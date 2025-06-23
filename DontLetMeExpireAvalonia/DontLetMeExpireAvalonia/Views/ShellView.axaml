@@ -1,0 +1,53 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:converters="clr-namespace:DontLetMeExpireAvalonia.Converters"
+			 xmlns:models="clr-namespace:DontLetMeExpireAvalonia.Models"
+			 xmlns:vm="clr-namespace:DontLetMeExpireAvalonia.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="450" d:DesignHeight="700"
+             x:Class="DontLetMeExpireAvalonia.Views.ShellView"
+			 x:DataType="vm:ShellViewModel"
+             TopLevel.AutoSafeAreaPadding="True">
+	<Design.DataContext>
+		<vm:ShellViewModel/>
+	</Design.DataContext>
+	<DockPanel>
+		<Grid ColumnDefinitions="80,*" DockPanel.Dock="Top" Background="{DynamicResource PageBackgroundBrush}">
+			<StackPanel Orientation="Horizontal" Spacing="4">
+			<Button Command="{Binding NavigateBackCommand}" Background="Transparent"
+					IsVisible="{Binding CanNavigateBack}">
+				<PathIcon Height="11" Data="{StaticResource Back}"/>
+			</Button>
+			<Button Command="{Binding ToggleFlyoutCommand}" Grid.Column="0" Background="Transparent">
+				<PathIcon Height="11" Data="{StaticResource Menu}"/>
+			</Button>
+			</StackPanel>
+			<TextBlock Text="{Binding Content.Title}" Grid.Column="1" VerticalAlignment="Center"/>
+		</Grid>
+	<SplitView IsPaneOpen="{Binding FlyoutIsPresented}"
+			   CompactPaneLength="40"
+			   OpenPaneLength="300"
+			   DisplayMode="Overlay"
+			   PaneBackground="{DynamicResource PageBackgroundBrush}">
+		<SplitView.Pane>
+			<StackPanel>
+				<ListBox ItemsSource="{Binding FlyoutItems}" SelectedItem="{Binding ActiveFlyoutItem}">
+					<ListBox.ItemTemplate>
+						<DataTemplate DataType="{x:Type models:FlyoutItem}">
+							<StackPanel Orientation="Horizontal" Spacing="16">
+								<PathIcon Data="{Binding Icon, Converter={x:Static converters:TypeConverters.IconConverter}}"
+										  Width="14" />
+								<TextBlock Text="{Binding Title}"/>
+							</StackPanel>
+						</DataTemplate>
+					</ListBox.ItemTemplate>
+				</ListBox>
+			</StackPanel>
+		</SplitView.Pane>
+		<SplitView.Content>
+			<TransitioningContentControl Content="{Binding Content}" />
+		</SplitView.Content>
+	</SplitView>
+	</DockPanel>
+</UserControl>

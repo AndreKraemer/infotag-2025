@@ -1,0 +1,84 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<ResourceDictionary.ThemeDictionaries>
+
+		<!-- Light Mode -->
+		<ResourceDictionary x:Key="Light">
+			<Color x:Key="Primary">#3d6dcc</Color>
+			<Color x:Key="PrimaryDarkest">#141f33</Color>
+			<Color x:Key="PrimaryDark">#505c73</Color>
+			<Color x:Key="PrimaryMedium">#8792a8</Color>
+			<Color x:Key="PrimaryLight">#dae2f2</Color>
+			<Color x:Key="PrimaryLightest">#f5f7fa</Color>
+
+			<Color x:Key="Success">#4caf8c</Color>
+			<Color x:Key="SuccessDark">#055c3c</Color>
+			<Color x:Key="SuccessLightest">#add0cc</Color>
+
+			<Color x:Key="Error">#d63c3c</Color>
+			<Color x:Key="ErrorDark">#b81c1c</Color>
+			<Color x:Key="ErrorLightest">#ffb0b0</Color>
+
+			<Color x:Key="Warning">#fb8C00</Color>
+			<Color x:Key="WarningDark">#e65100</Color>
+			<Color x:Key="WarningLightest">#ffcc80</Color>
+
+			<Color x:Key="PrimaryText">#242424</Color>
+			<Color x:Key="Secondary">#3d98dc</Color>
+
+			<SolidColorBrush x:Key="PageBackgroundBrush" Color="{StaticResource PrimaryLightest}"/>
+			<SolidColorBrush x:Key="CardBackgroundBrush" Color="White"/>
+			<SolidColorBrush x:Key="CardForegroundBrush" Color="{StaticResource PrimaryDarkest}"/>
+			<SolidColorBrush x:Key="SuccessBrush" Color="{StaticResource SuccessDark}"/>
+			<SolidColorBrush x:Key="WarningBrush" Color="{StaticResource WarningDark}"/>
+			<SolidColorBrush x:Key="ErrorBrush" Color="{StaticResource ErrorDark}"/>
+			<SolidColorBrush x:Key="ImageBackgroundBrush" Color="{StaticResource PrimaryLight}"/>
+			<SolidColorBrush x:Key="BorderBrush" Color="{StaticResource PrimaryLight}"/>
+			<SolidColorBrush x:Key="TextBlockForegroundBrush" Color="{StaticResource PrimaryDark}"/>
+			<SolidColorBrush x:Key="SecondaryButtonBackgroundBrush" Color="White"/>
+			<SolidColorBrush x:Key="ButtonBrush" Color="{DynamicResource Primary}"/>
+
+			<BoxShadows x:Key="TopBoxShadow">0 4 8 0 #505c73</BoxShadows>
+		</ResourceDictionary>
+
+		<!-- Dark Mode -->
+		<ResourceDictionary x:Key="Dark">
+			<Color x:Key="Primary">#3d98dc</Color>
+			<Color x:Key="PrimaryDarkest">#222426</Color>
+			<Color x:Key="PrimaryDark">#35373b</Color>
+			<Color x:Key="PrimaryMedium">#4d5054</Color>
+			<Color x:Key="PrimaryLight">#9c9fa6</Color>
+			<Color x:Key="PrimaryLightest">#c4c7cc</Color>
+
+			<Color x:Key="Success">#4caf8c</Color>
+			<Color x:Key="SuccessDark">#055c3c</Color>
+			<Color x:Key="SuccessLightest">#add0cc</Color>
+
+			<Color x:Key="Error">#d63c3c</Color>
+			<Color x:Key="ErrorDark">#b81c1c</Color>
+			<Color x:Key="ErrorLightest">#ffb0b0</Color>
+
+			<Color x:Key="Warning">#fb8C00</Color>
+			<Color x:Key="WarningDark">#e65100</Color>
+			<Color x:Key="WarningLightest">#ffcc80</Color>
+
+			<Color x:Key="PrimaryText">#f5f5f5</Color>
+			<Color x:Key="Secondary">#3d98dc</Color>
+
+			<SolidColorBrush x:Key="PageBackgroundBrush" Color="{StaticResource PrimaryDarkest}"/>
+			<SolidColorBrush x:Key="CardBackgroundBrush" Color="{StaticResource PrimaryDark}"/>
+			<SolidColorBrush x:Key="CardForegroundBrush" Color="{StaticResource PrimaryLightest}"/>
+			<SolidColorBrush x:Key="SuccessBrush" Color="{StaticResource Success}"/>
+			<SolidColorBrush x:Key="WarningBrush" Color="{StaticResource Warning}"/>
+			<SolidColorBrush x:Key="ErrorBrush" Color="{StaticResource Error}"/>
+			<SolidColorBrush x:Key="ImageBackgroundBrush" Color="{StaticResource PrimaryDark}"/>
+			<SolidColorBrush x:Key="BorderBrush" Color="{StaticResource PrimaryDark}"/>
+			<SolidColorBrush x:Key="TextBlockForegroundBrush" Color="{StaticResource PrimaryLightest}"/>
+
+			<SolidColorBrush x:Key="SecondaryButtonBackgroundBrush" Color="{StaticResource PrimaryDarkest}"/>
+			<SolidColorBrush x:Key="ButtonBrush" Color="{DynamicResource Secondary}"/>
+			<BoxShadows x:Key="TopBoxShadow">0 4 8 0 #141414</BoxShadows>
+		</ResourceDictionary>
+
+	</ResourceDictionary.ThemeDictionaries>
+</ResourceDictionary>

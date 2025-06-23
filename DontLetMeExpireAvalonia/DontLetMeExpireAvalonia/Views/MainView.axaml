@@ -1,0 +1,172 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:behaviors="clr-namespace:DontLetMeExpireAvalonia.Behaviors"
+             xmlns:vm="clr-namespace:DontLetMeExpireAvalonia.ViewModels"
+			 xmlns:models="clr-namespace:DontLetMeExpireAvalonia.Models"
+			 xmlns:controls="clr-namespace:DontLetMeExpireAvalonia.Controls"
+			 xmlns:strings="clr-namespace:DontLetMeExpireAvalonia.Resources.Strings"
+             mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="800"
+             x:Class="DontLetMeExpireAvalonia.Views.MainView"
+             x:DataType="vm:MainViewModel"
+			 Background="{DynamicResource PageBackgroundBrush}"
+			 Padding="{StaticResource ThicknessM}">
+	<Design.DataContext>
+		<!-- This only sets the DataContext for the previewer in an IDE,
+         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+		<vm:DesignTime_MainViewModel/>
+	</Design.DataContext>
+
+	<ScrollViewer>
+		<!-- Currently there is no Row/ Columnspacing in Avalonia
+		      this will probably come with 11.3
+			  see: https://github.com/AvaloniaUI/Avalonia/pull/18077 
+			  as a workaround we use margin for the child elements
+		-->
+		<Grid RowDefinitions="100,100,Auto,*,48"
+			  ColumnDefinitions="*,*">
+
+			<controls:DashboardTile
+				Margin="0,0,8,8"
+				Grid.Row="0"
+				Grid.Column="0"
+				Count="{Binding StockCount}"
+				BorderColor="{DynamicResource BorderBrush}"	
+				CountColor="{DynamicResource CardForegroundBrush}"
+				Icon="{StaticResource HomeStorage}"
+				IconColor="{DynamicResource CardForegroundBrush}"
+				Text="{x:Static strings:AppResources.MyStock}" 
+				behaviors:TappedBehavior.Command="{Binding NavigateToStockCommand}"/>
+
+			<controls:DashboardTile
+				Margin="8,0,0,8"
+				Grid.Row="0"
+				Grid.Column="1"
+				BorderColor="{DynamicResource SuccessBrush}"
+				Count="{Binding ExpiringSoonCount}"
+				CountColor="{DynamicResource SuccessBrush}"
+				Icon="{StaticResource Update}"
+				IconColor="{DynamicResource SuccessBrush}"
+				Text="{x:Static strings:AppResources.ExpiringSoon}" 
+				behaviors:TappedBehavior.Command="{Binding NavigateToExpiringSoonCommand}"/>
+
+			<controls:DashboardTile
+				Margin="0,8,8,0"
+				Grid.Row="1"
+				Grid.Column="0"
+				BorderColor="{DynamicResource WarningBrush}"
+				Count="{Binding ExpiresTodayCount}"
+				CountColor="{DynamicResource WarningBrush}"			
+				Icon="{StaticResource CalendarToday}"
+				IconColor="{DynamicResource WarningBrush}"
+				Text="{x:Static strings:AppResources.ExpiresToday}" 
+				behaviors:TappedBehavior.Command="{Binding NavigateToExpiresTodayCommand}"/>
+
+			<controls:DashboardTile
+				Margin="8,8,0,0"
+                Grid.Row="1"
+                Grid.Column="1"
+                BorderColor="DarkRed"
+                Count="{Binding ExpiredCount}"
+                CountColor="DarkRed"
+                Icon="{StaticResource Error}"
+				IconColor="DarkRed"
+                Text="{x:Static strings:AppResources.Expired}" 
+				behaviors:TappedBehavior.Command="{Binding NavigateToExpiredCommand}"/>
+
+			<TextBlock Grid.Row="2" Grid.ColumnSpan="2" Classes="mt-l"  Text="{x:Static strings:AppResources.MyStorageLocations}" FontSize="24"  />
+
+			<!-- Items Control nur Anzeigen, wenn Elemente vorhanden sind -->
+			<ItemsControl Grid.Row="3" Grid.ColumnSpan="2" Margin="0,8,0,8" ItemsSource="{Binding StorageLocations}"
+						  IsVisible="{Binding !!StorageLocations.Count}">
+				<ItemsControl.ItemTemplate>
+					<DataTemplate x:DataType="models:StorageLocationWithItemCount">
+						<Border Background="{DynamicResource CardBackgroundBrush}"
+								CornerRadius="16"
+								BorderThickness="0"
+								Margin="1,0,1,9"
+								BoxShadow="{DynamicResource TopBoxShadow}"
+								behaviors:TappedBehavior.Command="{Binding $parent[ItemsControl].((vm:MainViewModel)DataContext).NavigateToLocationCommand}"
+								behaviors:TappedBehavior.CommandParameter="{Binding Id}">
+							<Grid Margin="8"
+								  ColumnDefinitions="48,*,24"
+								  RowDefinitions="24,24">
+								<Ellipse Fill="{DynamicResource PrimaryLight}"
+										 Grid.RowSpan="2"/>
+								<PathIcon Data="{Binding Icon}"
+								   Height="40"
+									Foreground="{DynamicResource PrimaryDarkest}"
+								   HorizontalAlignment="Center"
+								   VerticalAlignment="Center"
+								   Grid.RowSpan="2"/>
+								<TextBlock
+									Margin="8,0"
+									Grid.Column="1"
+									FontWeight="Bold"
+									Text="{Binding Name}"
+									Foreground="{DynamicResource CardForegroundBrush}"/>
+								<TextBlock
+									Margin="8,0"
+									Grid.Column="1"
+									Grid.Row="1"
+									Foreground="DarkGray"
+									Text="{Binding ItemCount, StringFormat={x:Static strings:AppResources.XItems}}" />
+
+								<TextBlock
+									Grid.RowSpan="2"
+									Grid.Column="2"
+									Margin="0,0,8,0"
+									FontSize="36"
+									HorizontalAlignment="Right"
+									Text="›"
+									VerticalAlignment="Center" />
+							</Grid>
+						</Border>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>
+
+			<!-- Alternative Darstellung, falls es keine Lagerorte gibt -->
+			<StackPanel Classes="mt-xs" Spacing="8" Grid.Row="3" Grid.ColumnSpan="2"
+						IsVisible="{Binding !StorageLocations.Count}">
+				<Image Source="{SvgImage /Assets/no_data.svg}" Width="150"/>
+				<TextBlock Classes="mt-xs" FontSize="18" FontWeight="Bold"
+						   Text="{x:Static strings:AppResources.NoDataTitle}" />
+				<TextBlock Text="{x:Static strings:AppResources.NoDataDescription}" />
+
+				<TextBlock Classes="mt-xs" FontWeight="Bold" Text="{x:Static strings:AppResources.GetStarted}" />
+
+				<TextBlock Classes="link-label" Text="{x:Static strings:AppResources.StartWithSuggestedLocations}"
+						   behaviors:TappedBehavior.Command="{Binding CreateSuggestedLocationsCommand}">
+				</TextBlock>
+
+				<TextBlock FontSize="11" Text="{x:Static strings:AppResources.SuggestedLocationsDescription}" />
+
+				<TextBlock Classes="mt-xs link-label"
+						   Text="{x:Static strings:AppResources.StartWithSuggestedLocationsAndStock}"
+						   behaviors:TappedBehavior.Command="{Binding CreateSuggestedLocationsAndStockCommand}">
+
+				</TextBlock>
+
+				<TextBlock FontSize="11" Text="{x:Static strings:AppResources.SuggestedLocationsAndStockDescription}" />
+
+				<TextBlock Classes="mt-xs link-label"
+						   Text="{x:Static strings:AppResources.CreateNewLocationLinkText}"/>
+
+				<TextBlock FontSize="11" Text="{x:Static strings:AppResources.CreateNewLocationDescription}" />
+			</StackPanel>
+
+
+			<Button Classes="Primary" Grid.Row="4" Grid.Column="0"
+					Content="{x:Static strings:AppResources.AddEntry}"
+					Command="{Binding NavigateToAddItemCommand}"
+   					Foreground="White"
+					Margin="0,8,8,0"/>
+			<Button Classes="Secondary" Grid.Row="4" Grid.Column="1"
+					Content="{x:Static strings:AppResources.CreateNewLocation}"
+					Margin="8,8,0,0"/>
+
+		</Grid>
+	</ScrollViewer>
+</UserControl>

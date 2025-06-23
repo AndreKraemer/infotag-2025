@@ -1,0 +1,45 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:controls="clr-namespace:DontLetMeExpireAvalonia.Controls"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="DontLetMeExpireAvalonia.Controls.DashboardTile">
+	<UserControl.Template>
+		<ControlTemplate>
+			<Border 
+					Background="{DynamicResource CardBackgroundBrush}"
+					BorderThickness="1"
+					BorderBrush="{TemplateBinding BorderColor}"
+					CornerRadius="8">
+				<Grid
+					  ColumnDefinitions="*,*"
+    				  Margin="8"
+					  RowDefinitions="Auto,*">
+					<PathIcon Data="{TemplateBinding Icon}"
+						   Height="40"
+						   Foreground="{TemplateBinding IconColor}"
+						   HorizontalAlignment="Left"/>
+					<!--  Anzeige der Anzahl der Einträge, rechtsbündig ausgerichtet  -->
+					<TextBlock
+						Grid.Row="0"
+						Grid.Column="1"
+						FontWeight="Bold"
+						FontSize="20"
+						Foreground="{TemplateBinding CountColor}"
+						HorizontalAlignment="Right"
+						Text="{TemplateBinding Count}"/>
+
+					<!--  Anzeige der Beschreibung  -->
+					<TextBlock
+						Grid.Row="1"
+						Grid.Column="0"
+						Grid.ColumnSpan="2"
+						FontSize="20"
+						Text="{TemplateBinding Text}"
+						VerticalAlignment="Bottom" />
+				</Grid>
+			</Border>
+		</ControlTemplate>
+	</UserControl.Template>
+</UserControl>

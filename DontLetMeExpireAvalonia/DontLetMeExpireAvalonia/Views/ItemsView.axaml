@@ -1,0 +1,62 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:vm="clr-namespace:DontLetMeExpireAvalonia.ViewModels"
+			 xmlns:models="clr-namespace:DontLetMeExpireAvalonia.Models"
+			 xmlns:behaviors="clr-namespace:DontLetMeExpireAvalonia.Behaviors"
+			 xmlns:converters="clr-namespace:DontLetMeExpireAvalonia.Converters"
+			 x:DataType="vm:ItemsViewModel"
+             mc:Ignorable="d" d:DesignWidth="450" d:DesignHeight="700"
+             x:Class="DontLetMeExpireAvalonia.Views.ItemsView">
+	<Design.DataContext>
+		<!-- This only sets the DataContext for the previewer in an IDE,
+         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+		<vm:DesignTime_ItemsViewModel/>
+	</Design.DataContext>
+	<ListBox ItemsSource="{Binding Items}">
+		<ListBox.ItemTemplate>
+			<DataTemplate DataType="{x:Type models:Item}">
+				<Border BorderThickness="0,0,0,1" BorderBrush="#8792a8"
+						Background="Transparent"
+						behaviors:TappedBehavior.Command="{Binding $parent[ItemsControl].((vm:ItemsViewModel)DataContext).NavigateToDetailsCommand}"
+						behaviors:TappedBehavior.CommandParameter="{Binding .}">
+				<Grid
+					ColumnDefinitions="48,*,auto"
+					RowDefinitions="auto, auto, 16">
+					<Ellipse
+                            Grid.Row="0"
+                            Grid.RowSpan="2"
+							Fill="#f5f7fa">
+					</Ellipse>
+					<Image Source="/Assets/logo.ico"
+						   Width="48" Height="48"
+						   Grid.Row="0"
+                            Grid.RowSpan="2"/>
+					<TextBlock
+						Grid.Row="0"
+						Grid.Column="1"
+						Margin="8,0,0,0"
+						FontWeight="Bold"
+						Text="{Binding Name}"
+						Foreground="{DynamicResource CardForegroundBrush}" />
+					<TextBlock
+						Grid.Row="1"
+						Grid.Column="1"
+						Margin="8,0,0,0"
+						Text="{Binding ExpirationDate, Converter={x:Static converters:TypeConverters.DateToRelativeStringConverter}}"
+						Foreground="{DynamicResource CardForegroundBrush}" />
+					<TextBlock
+					   Grid.RowSpan="2"
+					   Grid.Column="2"
+					   FontSize="24"
+					   Text="›"
+					   Foreground="{DynamicResource CardForegroundBrush}"
+					   VerticalAlignment="Center" />
+					
+				</Grid>
+				</Border>
+			</DataTemplate>
+		</ListBox.ItemTemplate>
+	</ListBox>
+</UserControl>

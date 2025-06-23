@@ -1,0 +1,55 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:strings="clr-namespace:DontLetMeExpireAvalonia.Resources.Strings"
+			 xmlns:vm="clr-namespace:DontLetMeExpireAvalonia.ViewModels"
+			 x:DataType="vm:ItemViewModel"
+             mc:Ignorable="d" d:DesignWidth="450" d:DesignHeight="700"
+             x:Class="DontLetMeExpireAvalonia.Views.ItemView">
+	<Design.DataContext>
+		<!-- This only sets the DataContext for the previewer in an IDE,
+         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+		<vm:DesignTime_ItemViewModel/>
+	</Design.DataContext>
+	<ScrollViewer>
+		<Grid RowDefinitions="300,auto">
+			<Rectangle Grid.Row="0" Fill="{DynamicResource ImageBackgroundBrush}" Height="300" />
+			<Button Grid.Row="0" Margin="16" HorizontalAlignment="Right" Content="{x:Static strings:AppResources.DeleteImage}" VerticalAlignment="Top"/>
+			<StackPanel Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Classes="s-xxs">
+				<PathIcon Data="{StaticResource AddAPhoto}" Height="48" Width="48"/>
+				<TextBlock Text="{x:Static strings:AppResources.TapToAddImage}"/>
+			</StackPanel>
+			<StackPanel Grid.Row="1" Spacing="8" Margin="16">
+				<DockPanel>
+					
+					<Button Classes="Primary ml-xxs" Padding="8" DockPanel.Dock="Right">
+						<PathIcon Data="{StaticResource BarcodeScanner}" Foreground="{DynamicResource SecondaryButtonBackgroundBrush}"/>
+					</Button>
+					<TextBox Watermark="{x:Static strings:AppResources.SearchBarcode}" Text="{Binding SearchText}" >
+						<TextBox.InnerRightContent>
+							<Button Background="Transparent" Command="{Binding SearchBarcodeCommand}">
+								<PathIcon Height="12" Data="{StaticResource Search}" Foreground="{DynamicResource TextBlockForegroundBrush}"/>
+							</Button>
+						</TextBox.InnerRightContent>
+						<TextBox.KeyBindings>
+							<KeyBinding Command="{Binding SearchBarcodeCommand}" Gesture="Enter" />
+						</TextBox.KeyBindings>
+					</TextBox>
+				</DockPanel>
+				<TextBlock Text="{x:Static strings:AppResources.Name}"/>
+				<TextBox Text="{Binding Name}" />
+				<TextBlock Margin="0,8,0,0" Text="{x:Static strings:AppResources.StorageLocation}"/>
+				<ComboBox HorizontalAlignment="Stretch" ItemsSource="{Binding StorageLocations}"
+						  SelectedItem="{Binding SelectedLocation}" DisplayMemberBinding="{Binding Name}">
+				</ComboBox>
+				<TextBlock Margin="0,8,0,0" Text="{x:Static strings:AppResources.ExpirationDate}"/>
+				<CalendarDatePicker SelectedDate="{Binding ExpirationDate}"/>
+				<TextBlock Margin="0,8,0,0" Text="{x:Static strings:AppResources.Amount}" />
+				<NumericUpDown  Value="{Binding Amount}" />
+				<Button Classes="Primary" Margin="0,8,0,0" Content="{x:Static strings:AppResources.Save}" Command="{Binding SaveCommand}" />
+			</StackPanel>
+		</Grid>
+
+	</ScrollViewer>
+</UserControl>

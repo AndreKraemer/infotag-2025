@@ -1,0 +1,87 @@
+<Styles xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<Style Selector="Button.Primary">
+		<Setter Property="Background" Value="{DynamicResource ButtonBrush}"/>
+		<Setter Property="Foreground" Value="{DynamicResource SecondaryButtonBackgroundBrush}"/>
+		<Setter Property="Padding" Value="12"/>
+		<Setter Property="CornerRadius" Value="8"/>
+		<Setter Property="HorizontalAlignment" Value="Stretch"/>
+		<Setter Property="HorizontalContentAlignment" Value="Center"/>
+	</Style>
+	<Style Selector="Button.Secondary">
+		<Setter Property="Background" Value="{DynamicResource SecondaryButtonBackgroundBrush}"/>
+		<Setter Property="BorderThickness" Value="1"/>
+		<Setter Property="BorderBrush" Value="{DynamicResource ButtonBrush}"/>
+		<Setter Property="Foreground" Value="{DynamicResource ButtonBrush}"/>
+		<Setter Property="Padding" Value="12"/>
+		<Setter Property="CornerRadius" Value="8"/>
+		<Setter Property="HorizontalAlignment" Value="Stretch"/>
+		<Setter Property="HorizontalContentAlignment" Value="Center"/>
+	</Style>
+
+	<Style Selector="TextBlock">
+		<Setter Property="Foreground" Value="{DynamicResource TextBlockForegroundBrush}"/>
+	</Style>
+
+	<Style Selector="TextBlock.link-label">
+		<Setter Property="Foreground" Value="#3d6dcc"/>
+		<Setter Property="TextDecorations" Value ="Underline"/>
+	</Style>
+
+	<Style Selector="StackPanel.s-xxs">
+		<Setter Property="Spacing" Value="4"/>
+	</Style>
+
+	<Style Selector="StackPanel.s-xs">
+		<Setter Property="Spacing" Value="8"/>
+	</Style>
+
+	<Style Selector="TextBlock.m-xs, StackPanel.m-xs">
+		<Setter Property="Margin" Value="8"/>
+	</Style>
+
+
+	<Style Selector="TextBlock.mt-xxs">
+		<Setter Property="Margin" Value="0,4,0,0"/>
+	</Style>
+
+	<Style Selector="TextBlock.mt-xs, StackPanel.mt-xs">
+		<Setter Property="Margin" Value="0,8,0,0"/>
+	</Style>
+
+	<Style Selector="TextBlock.ml-xxs, Button.ml-xxs">
+		<Setter Property="Margin" Value="4,0,0,0"/>
+	</Style>
+	
+	<Style Selector="TextBlock.ml-xs, Button.ml-xs">
+		<Setter Property="Margin" Value="8,0,0,0"/>
+	</Style>
+
+
+	<Style Selector="TextBlock.mt-s">
+		<Setter Property="Margin" Value="0,12,0,0"/>
+	</Style>
+
+
+	<Style Selector="TextBlock.mt-m">
+		<Setter Property="Margin" Value="0,16,0,0"/>
+	</Style>
+
+
+	<Style Selector="TextBlock.mt-l">
+		<Setter Property="Margin" Value="0,24,0,0"/>
+	</Style>
+
+	<Style Selector="Button.m-m">
+		<Setter Property="Margin" Value="16"/>
+	</Style>
+
+
+	<Style Selector="Label.bold">
+		<Setter Property="FontWeight" Value="Bold"/>
+	</Style>
+
+
+
+</Styles>
