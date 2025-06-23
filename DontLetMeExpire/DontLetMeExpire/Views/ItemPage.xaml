@@ -124,7 +124,8 @@
                         ios:SearchBar.SearchBarStyle="Minimal"
                         Placeholder="{x:Static strings:AppResources.SearchBarcode}"
                         SearchCommand="{Binding SearchBarcodeCommand}"
-                        Text="{Binding SearchText}" />
+                        Text="{Binding SearchText}"
+                        SearchIconColor="{DynamicResource Primary}"/>
                     <Button
                         Grid.Column="1"
                         Command="{Binding ScanBarcodeCommand}"
