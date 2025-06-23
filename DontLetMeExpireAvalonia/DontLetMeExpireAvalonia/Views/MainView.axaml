@@ -25,10 +25,11 @@
 			  as a workaround we use margin for the child elements
 		-->
 		<Grid RowDefinitions="100,100,Auto,*,48"
-			  ColumnDefinitions="*,*">
+			  ColumnDefinitions="*,*"
+			  RowSpacing="8"
+			  ColumnSpacing="8">
 
 			<controls:DashboardTile
-				Margin="0,0,8,8"
 				Grid.Row="0"
 				Grid.Column="0"
 				Count="{Binding StockCount}"
@@ -40,7 +41,6 @@
 				behaviors:TappedBehavior.Command="{Binding NavigateToStockCommand}"/>
 
 			<controls:DashboardTile
-				Margin="8,0,0,8"
 				Grid.Row="0"
 				Grid.Column="1"
 				BorderColor="{DynamicResource SuccessBrush}"
@@ -52,7 +52,6 @@
 				behaviors:TappedBehavior.Command="{Binding NavigateToExpiringSoonCommand}"/>
 
 			<controls:DashboardTile
-				Margin="0,8,8,0"
 				Grid.Row="1"
 				Grid.Column="0"
 				BorderColor="{DynamicResource WarningBrush}"
@@ -64,7 +63,6 @@
 				behaviors:TappedBehavior.Command="{Binding NavigateToExpiresTodayCommand}"/>
 
 			<controls:DashboardTile
-				Margin="8,8,0,0"
                 Grid.Row="1"
                 Grid.Column="1"
                 BorderColor="DarkRed"
@@ -78,7 +76,7 @@
 			<TextBlock Grid.Row="2" Grid.ColumnSpan="2" Classes="mt-l"  Text="{x:Static strings:AppResources.MyStorageLocations}" FontSize="24"  />
 
 			<!-- Items Control nur Anzeigen, wenn Elemente vorhanden sind -->
-			<ItemsControl Grid.Row="3" Grid.ColumnSpan="2" Margin="0,8,0,8" ItemsSource="{Binding StorageLocations}"
+			<ItemsControl Grid.Row="3" Grid.ColumnSpan="2" ItemsSource="{Binding StorageLocations}"
 						  IsVisible="{Binding !!StorageLocations.Count}">
 				<ItemsControl.ItemTemplate>
 					<DataTemplate x:DataType="models:StorageLocationWithItemCount">
@@ -89,7 +87,7 @@
 								BoxShadow="{DynamicResource TopBoxShadow}"
 								behaviors:TappedBehavior.Command="{Binding $parent[ItemsControl].((vm:MainViewModel)DataContext).NavigateToLocationCommand}"
 								behaviors:TappedBehavior.CommandParameter="{Binding Id}">
-							<Grid Margin="8"
+							<Grid ColumnSpacing="8" RowSpacing="8"
 								  ColumnDefinitions="48,*,24"
 								  RowDefinitions="24,24">
 								<Ellipse Fill="{DynamicResource PrimaryLight}"
@@ -101,13 +99,11 @@
 								   VerticalAlignment="Center"
 								   Grid.RowSpan="2"/>
 								<TextBlock
-									Margin="8,0"
 									Grid.Column="1"
 									FontWeight="Bold"
 									Text="{Binding Name}"
 									Foreground="{DynamicResource CardForegroundBrush}"/>
 								<TextBlock
-									Margin="8,0"
 									Grid.Column="1"
 									Grid.Row="1"
 									Foreground="DarkGray"
@@ -116,7 +112,6 @@
 								<TextBlock
 									Grid.RowSpan="2"
 									Grid.Column="2"
-									Margin="0,0,8,0"
 									FontSize="36"
 									HorizontalAlignment="Right"
 									Text="›"
@@ -161,11 +156,9 @@
 			<Button Classes="Primary" Grid.Row="4" Grid.Column="0"
 					Content="{x:Static strings:AppResources.AddEntry}"
 					Command="{Binding NavigateToAddItemCommand}"
-   					Foreground="White"
-					Margin="0,8,8,0"/>
+   					Foreground="White"/>
 			<Button Classes="Secondary" Grid.Row="4" Grid.Column="1"
-					Content="{x:Static strings:AppResources.CreateNewLocation}"
-					Margin="8,8,0,0"/>
+					Content="{x:Static strings:AppResources.CreateNewLocation}"/>
 
 		</Grid>
 	</ScrollViewer>
