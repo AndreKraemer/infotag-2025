@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Window xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DontLetMeExpire.AppWindow">
+    <Window.TitleBar>
+        <TitleBar Title="Don't let me expire"
+                  Icon="logo.png" 
+                  Subtitle="Stop wasting food"
+                  HeightRequest="50">
+            <TitleBar.LeadingContent>
+                <Label Text="🍇" VerticalOptions="Center"/>
+            </TitleBar.LeadingContent>
+
+            <TitleBar.Content>
+                <SearchBar 
+                   Placeholder="Search" 
+                    MaximumWidthRequest="300" MaximumHeightRequest="40"/>
+            </TitleBar.Content>
+            <TitleBar.TrailingContent>
+                <Label Text="🍎" VerticalOptions="Center"/>
+            </TitleBar.TrailingContent>
+        </TitleBar>
+    </Window.TitleBar>
+</Window>
