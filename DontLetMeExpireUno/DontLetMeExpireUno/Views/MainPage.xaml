@@ -1,0 +1,258 @@
+﻿<Page x:Class="DontLetMeExpireUno.Views.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:local="using:DontLetMeExpireUno.Views"
+      xmlns:uen="using:Uno.Extensions.Navigation.UI"
+      xmlns:utu="using:Uno.Toolkit.UI"
+      NavigationCacheMode="Required"
+      Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <ScrollViewer>
+        <Grid utu:SafeArea.Insets="VisibleBounds">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <utu:NavigationBar Content="{Binding Title}" />
+            <Grid RowDefinitions="100,100,Auto,*,48"
+                  ColumnDefinitions="*,*"
+                  Grid.Row="1" RowSpacing="8" ColumnSpacing="8" Margin="16">
+                <Border Grid.Row="0"
+					Grid.Column="0"
+					Background="White"
+					BorderThickness="1"
+					BorderBrush="DarkGray"
+					CornerRadius="8"
+                        Padding="8">
+                    <Grid
+					  ColumnDefinitions="*,*"
+					  RowDefinitions="Auto,*">
+                        <Image HorizontalAlignment="Left" Source="icon.ico"  Width="40" Height="40"/>
+                        <!--  Anzeige der Anzahl der Einträge, rechtsbündig ausgerichtet  -->
+                        <TextBlock
+						Grid.Row="0"
+						Grid.Column="1"
+						FontWeight="Bold"
+						FontSize="20"
+						Foreground="DarkGray"
+						HorizontalAlignment="Right"
+						Text="{Binding StockCount}"/>
+
+                        <!--  Anzeige der Beschreibung  -->
+                        <TextBlock
+						Grid.Row="1"
+						Grid.Column="0"
+						Grid.ColumnSpan="2"
+						FontSize="20"
+						Text="Mein Vorrat"
+						VerticalAlignment="Bottom" />
+                    </Grid>
+                </Border>
+                <Border Grid.Row="0"
+				    Grid.Column="1"
+				    Background="White"
+				    BorderThickness="1"
+				    BorderBrush="DarkGreen"
+				    CornerRadius="8"
+					Padding="8">
+                    <Grid
+					  ColumnDefinitions="*,*"
+					  RowDefinitions="Auto,*">
+                        <Image HorizontalAlignment="Left" Source="icon.ico"  Width="40" Height="40"/>
+                        <!--  Anzeige der Anzahl der Einträge, rechtsbündig ausgerichtet  -->
+                        <TextBlock
+						    Grid.Row="0"
+						    Grid.Column="1"
+						    FontWeight="Bold"
+						    FontSize="20"
+						    Foreground="DarkGreen"
+						    HorizontalAlignment="Right"
+						    Text="{Binding ExpiringSoonCount}"/>
+
+                        <!--  Anzeige der Beschreibung  -->
+                        <TextBlock
+						    Grid.Row="1"
+						    Grid.Column="0"
+						    Grid.ColumnSpan="2"
+						    FontSize="20"
+						    Text="Läuft bald ab"
+						    VerticalAlignment="Bottom" />
+                    </Grid>
+                </Border>
+
+                <Border Grid.Row="1"
+					Grid.Column="0"
+					Background="White"
+					BorderThickness="1"
+					BorderBrush="DarkOrange"
+					CornerRadius="8"
+					Padding="8">
+                    <Grid
+					  ColumnDefinitions="*,*"
+					  RowDefinitions="Auto,*">
+                        <Image HorizontalAlignment="Left" Source="icon.ico"  Width="40" Height="40"/>
+                        <!--  Anzeige der Anzahl der Einträge, rechtsbündig ausgerichtet  -->
+                        <TextBlock
+						    Grid.Row="0"
+						    Grid.Column="1"
+						    FontWeight="Bold"
+						    FontSize="20"
+						    Foreground="DarkOrange"
+						    HorizontalAlignment="Right"
+						    Text="{Binding ExpiresTodayCount}"/>
+
+                        <!--  Anzeige der Beschreibung  -->
+                        <TextBlock
+						    Grid.Row="1"
+						    Grid.Column="0"
+						    Grid.ColumnSpan="2"
+						    FontSize="20"
+						    Text="Läuft heute ab"
+						    VerticalAlignment="Bottom" />
+                    </Grid>
+                </Border>
+
+                <Border Grid.Row="1"
+				    Grid.Column="1"
+				    Background="White"
+				    BorderThickness="1"
+				    BorderBrush="DarkRed"
+				    CornerRadius="8"
+                    Padding="8">
+                    <Grid
+					  ColumnDefinitions="*,*"
+					  RowDefinitions="Auto,*">
+                        <Image HorizontalAlignment="Left" Source="icon.ico"  Width="40" Height="40"/>
+                        <!--  Anzeige der Anzahl der Einträge, rechtsbündig ausgerichtet  -->
+                        <TextBlock
+						    Grid.Row="0"
+						    Grid.Column="1"
+						    FontWeight="Bold"
+						    FontSize="20"
+						    Foreground="DarkRed"
+						    HorizontalAlignment="Right"
+						    Text="{Binding ExpiredCount}"/>
+
+                        <!--  Anzeige der Beschreibung  -->
+                        <TextBlock
+						    Grid.Row="1"
+						    Grid.Column="0"
+						    Grid.ColumnSpan="2"
+						    FontSize="20"
+						    Text="Abgelaufen"
+						    VerticalAlignment="Bottom" />
+                    </Grid>
+                </Border>
+                <TextBlock Grid.Row="2" Grid.ColumnSpan="2" Margin="0,16,0,0" Text="Meine Lagerorte" FontSize="24"  />
+                <StackPanel Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="2" Spacing="8" >
+                    <utu:ShadowContainer Background="White">
+                        <utu:ShadowContainer.Shadows>
+                            <utu:Shadow OffsetX="0" OffsetY="4" BlurRadius="8" Opacity="0.4" Color="DarkGray" />
+                        </utu:ShadowContainer.Shadows>
+                        <Border CornerRadius="16"
+						    BorderThickness="0"
+						    Margin="1,0,1,9">
+                            <Grid Margin="8"
+						        ColumnDefinitions="48,*,24"
+						        RowDefinitions="24,24">
+                                <Ellipse Fill="AliceBlue" Grid.RowSpan="2"/>
+                                <Image Height="20" Width="20" Source="Icon.ico" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.RowSpan="2"/>
+                                <TextBlock
+							        Margin="8,0"
+							        Grid.Column="1"
+							        FontWeight="Bold"
+							        Text="Gefrierschrank" />
+                                <TextBlock
+							        Margin="8,0"
+							        Grid.Column="1"
+							        Grid.Row="1"
+							        Foreground="DarkGray"
+							        Text="3 Einträge" />
+                                <TextBlock
+                                    Grid.RowSpan="2"
+                                    Grid.Column="2"
+                                    Margin="0,0,8,0"
+                                    FontSize="36"
+                                    HorizontalAlignment="Right"
+                                    Text="›"
+                                    VerticalAlignment="Center" />
+                            </Grid>
+                        </Border>
+                    </utu:ShadowContainer>
+                    <utu:ShadowContainer Background="White">
+                        <utu:ShadowContainer.Shadows>
+                            <utu:Shadow OffsetX="0" OffsetY="4" BlurRadius="8" Opacity="0.4" Color="DarkGray" />
+                        </utu:ShadowContainer.Shadows>
+                        <Border CornerRadius="16"
+						    BorderThickness="0"
+						    Margin="1,0,1,9">
+                            <Grid Margin="8"
+						        ColumnDefinitions="48,*,24"
+						        RowDefinitions="24,24">
+                                <Ellipse Fill="AliceBlue" Grid.RowSpan="2"/>
+                                <Image Height="20" Width="20" Source="Icon.ico" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.RowSpan="2"/>
+                                <TextBlock
+							        Margin="8,0"
+							        Grid.Column="1"
+							        FontWeight="Bold"
+							        Text="Kühlschrank" />
+                                <TextBlock
+							        Margin="8,0"
+							        Grid.Column="1"
+							        Grid.Row="1"
+							        Foreground="DarkGray"
+							        Text="5 Einträge" />
+                                <TextBlock
+                                    Grid.RowSpan="2"
+                                    Grid.Column="2"
+                                    Margin="0,0,8,0"
+                                    FontSize="36"
+                                    HorizontalAlignment="Right"
+                                    Text="›"
+                                    VerticalAlignment="Center" />
+                            </Grid>
+                        </Border>
+                    </utu:ShadowContainer>
+                    <utu:ShadowContainer Background="White">
+                        <utu:ShadowContainer.Shadows>
+                            <utu:Shadow OffsetX="0" OffsetY="4" BlurRadius="8" Opacity="0.4" Color="DarkGray" />
+                        </utu:ShadowContainer.Shadows>
+                        <Border CornerRadius="16"
+						    BorderThickness="0"
+						    Margin="1,0,1,9">
+                            <Grid Margin="8"
+						        ColumnDefinitions="48,*,24"
+						        RowDefinitions="24,24">
+                                <Ellipse Fill="AliceBlue" Grid.RowSpan="2"/>
+                                <Image Height="20" Width="20" Source="Icon.ico" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.RowSpan="2"/>
+                                <TextBlock
+							        Margin="8,0"
+							        Grid.Column="1"
+							        FontWeight="Bold"
+							        Text="Vorratsschrank" />
+                                <TextBlock
+							        Margin="8,0"
+							        Grid.Column="1"
+							        Grid.Row="1"
+							        Foreground="DarkGray"
+							        Text="4 Einträge" />
+                                <TextBlock
+                                    Grid.RowSpan="2"
+                                    Grid.Column="2"
+                                    Margin="0,0,8,0"
+                                    FontSize="36"
+                                    HorizontalAlignment="Right"
+                                    Text="›"
+                                    VerticalAlignment="Center" />
+                            </Grid>
+                        </Border>
+                    </utu:ShadowContainer>
+
+                </StackPanel>
+                <Button  Grid.Column="0" Grid.Row="4" Content="Eintrag hinzufu&#x308;gen"
+                         Command="{Binding NavigateToDetailsCommand}"
+                         HorizontalAlignment="Stretch" Style="{StaticResource AccentButtonStyle}"/>
+                <Button HorizontalAlignment="Stretch" Grid.Column="1" Grid.Row="4" Content="Neuen Ort anlegen" />
+            </Grid>
+        </Grid>
+    </ScrollViewer>
+</Page>

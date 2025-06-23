@@ -1,0 +1,10 @@
+{
+  "background_color": "#ffffff",
+  "description": "DontLetMeExpireUno",
+  "display": "standalone",
+  "name": "DontLetMeExpireUno",
+  "short_name": "DontLetMeExpireUno",
+  "start_url": "/index.html",
+  "theme_color": "#ffffff",
+  "scope": "/"
+}
