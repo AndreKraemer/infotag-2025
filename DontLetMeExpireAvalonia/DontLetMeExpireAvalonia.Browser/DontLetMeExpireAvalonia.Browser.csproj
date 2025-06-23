@@ -5,6 +5,9 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+	<PropertyGroup>
+		<WasmAllowUndefinedSymbols>true</WasmAllowUndefinedSymbols>
+	</PropertyGroup>
   <ItemGroup>
     <Content Remove="wwwroot\favicon.ico" />
   </ItemGroup>
@@ -14,6 +17,7 @@
 
   <ItemGroup>
     <PackageReference Include="Avalonia.Browser" />
+    <PackageReference Include="SkiaSharp.NativeAssets.WebAssembly" />
   </ItemGroup>
 
   <ItemGroup>
