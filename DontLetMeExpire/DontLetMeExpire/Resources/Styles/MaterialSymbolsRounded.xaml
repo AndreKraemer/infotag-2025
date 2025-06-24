@@ -9,6 +9,7 @@
     <x:String x:Key="IconAdd_location_alt">&#xef3a;</x:String>
     <x:String x:Key="IconAdd_notes">&#xe091;</x:String>
     <x:String x:Key="IconAdd">&#xe145;</x:String>
+    <x:String x:Key="IconAI">&#xf527;</x:String>
     <x:String x:Key="IconApartment">&#xea40;</x:String>
     <x:String x:Key="IconArrow_forward_ios">&#xe5e1;</x:String>
     <x:String x:Key="IconArrow_right_alt">&#xe941;</x:String>

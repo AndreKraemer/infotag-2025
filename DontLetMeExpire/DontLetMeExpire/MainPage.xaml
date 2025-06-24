@@ -1,136 +1,164 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
     x:Class="DontLetMeExpire.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/maui/global"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:md="clr-namespace:Plugin.Maui.MarkdownView;assembly=Plugin.Maui.MarkdownView"
     Padding="{StaticResource ThicknessM}"
     x:DataType="MainViewModel"
     BackgroundColor="{AppThemeBinding Light={StaticResource PrimaryLightLightest},
                                       Dark={StaticResource PrimaryDarkDarkest}}">
+
+    <!-- Main Content -->
     <ScrollView>
         <Grid
-            ColumnDefinitions="*,*"
-            ColumnSpacing="{StaticResource SizeM}"
-            RowDefinitions="100,100,200,auto,*,48"
-            RowSpacing="{StaticResource SizeM}">
+                ColumnDefinitions="*,*"
+                ColumnSpacing="{StaticResource SizeM}"
+                RowDefinitions="100,100,200,auto,*,48"
+                RowSpacing="{StaticResource SizeM}">
 
             <DashboardTile
-                Grid.Row="0"
-                Grid.Column="0"
-                BorderColor="{AppThemeBinding Light={StaticResource PrimaryLightLight},
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    BorderColor="{AppThemeBinding Light={StaticResource PrimaryLightLight},
                                               Dark={StaticResource PrimaryDarkLight}}"
-                Command="{Binding NavigateToStockCommand}"
-                Count="{Binding StockCount}"
-                CountColor="{AppThemeBinding Light={StaticResource PrimaryLightDarkest},
+                    Command="{Binding NavigateToStockCommand}"
+                    Count="{Binding StockCount}"
+                    CountColor="{AppThemeBinding Light={StaticResource PrimaryLightDarkest},
                                              Dark={StaticResource PrimaryDarkLightest}}"
-                Icon="{StaticResource IconHome_storage}"
-                IconColor="{AppThemeBinding Light={StaticResource PrimaryLightDarkest},
+                    Icon="{StaticResource IconHome_storage}"
+                    IconColor="{AppThemeBinding Light={StaticResource PrimaryLightDarkest},
                                             Dark={StaticResource White}}"
-                IsLoading="{Binding IsLoading}"
-                Text="{x:Static AppResources.MyStock}"
-                TextColor="{AppThemeBinding Light={StaticResource PrimaryLightDark},
+                    IsLoading="{Binding IsLoading}"
+                    Text="{x:Static AppResources.MyStock}"
+                    TextColor="{AppThemeBinding Light={StaticResource PrimaryLightDark},
                                             Dark={StaticResource PrimaryDarkLightest}}" />
-            <DashboardTile
-                Grid.Row="0"
-                Grid.Column="1"
-                BorderColor="{AppThemeBinding Light={StaticResource SuccessDark},
+
+            <!-- Expiring Soon Dashboard Tile with AI Button Overlay -->
+            <DashboardTile Grid.Row="0" Grid.Column="1"
+                        BorderColor="{AppThemeBinding Light={StaticResource SuccessDark},
                                               Dark={StaticResource Success}}"
-                Command="{Binding NavigateToExpiringSoonCommand}"
-                Count="{Binding ExpiringSoonCount}"
-                CountColor="{AppThemeBinding Light={StaticResource SuccessDark},
+                        Command="{Binding NavigateToExpiringSoonCommand}"
+                        Count="{Binding ExpiringSoonCount}"
+                        CountColor="{AppThemeBinding Light={StaticResource SuccessDark},
                                              Dark={StaticResource Success}}"
-                Icon="{StaticResource IconUpdate}"
-                IconColor="{AppThemeBinding Light={StaticResource SuccessDark},
+                        Icon="{StaticResource IconUpdate}"
+                        IconColor="{AppThemeBinding Light={StaticResource SuccessDark},
                                             Dark={StaticResource Success}}"
-                IsLoading="{Binding IsLoading}"
-                Text="{x:Static AppResources.ExpiringSoon}"
-                TextColor="{AppThemeBinding Light={StaticResource PrimaryLightDark},
+                        IsLoading="{Binding IsLoading}"
+                        Text="{x:Static AppResources.ExpiringSoon}"
+                        TextColor="{AppThemeBinding Light={StaticResource PrimaryLightDark},
                                             Dark={StaticResource PrimaryDarkLightest}}" />
+
+            <!-- AI Button Overlay -->
+            <Button Grid.Row="0" Grid.Column="1"
+                        Command="{Binding GenerateRecipeCommand}"
+                        IsEnabled="{Binding ExpiringSoonCount, Converter={IntToBoolConverter}}"
+                        FontFamily="MaterialSymbolsRounded"
+                        Text="{StaticResource IconAI}"
+                        FontSize="18"
+                        WidthRequest="46"
+                        HeightRequest="46"
+                        Padding="0"
+                        CornerRadius="23"
+                        HorizontalOptions="End"
+                        VerticalOptions="End"
+                        Margin="5"
+                        BackgroundColor="{AppThemeBinding Light=#5C6BC0, Dark=#3F51B5}"
+                        TextColor="White">
+                <Button.Shadow>
+                    <Shadow Brush="#44000000" Radius="4" Offset="0,2" />
+                </Button.Shadow>
+            </Button>
+
+
             <DashboardTile
-                Grid.Row="1"
-                Grid.Column="0"
-                BorderColor="{AppThemeBinding Light={StaticResource WarningDark},
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    BorderColor="{AppThemeBinding Light={StaticResource WarningDark},
                                               Dark={StaticResource Warning}}"
-                Command="{Binding NavigateToExpiresTodayCommand}"
-                Count="{Binding ExpiresTodayCount}"
-                CountColor="{AppThemeBinding Light={StaticResource WarningDark},
+                    Command="{Binding NavigateToExpiresTodayCommand}"
+                    Count="{Binding ExpiresTodayCount}"
+                    CountColor="{AppThemeBinding Light={StaticResource WarningDark},
                                              Dark={StaticResource Warning}}"
-                Icon="{StaticResource IconCalendar_today}"
-                IconColor="{AppThemeBinding Light={StaticResource WarningDark},
+                    Icon="{StaticResource IconCalendar_today}"
+                    IconColor="{AppThemeBinding Light={StaticResource WarningDark},
                                             Dark={StaticResource Warning}}"
-                IsLoading="{Binding IsLoading}"
-                Text="{x:Static AppResources.ExpiresToday}"
-                TextColor="{AppThemeBinding Light={StaticResource PrimaryLightDark},
+                    IsLoading="{Binding IsLoading}"
+                    Text="{x:Static AppResources.ExpiresToday}"
+                    TextColor="{AppThemeBinding Light={StaticResource PrimaryLightDark},
                                             Dark={StaticResource PrimaryDarkLightest}}" />
 
             <DashboardTile
-                Grid.Row="1"
-                Grid.Column="1"
-                BorderColor="{AppThemeBinding Light={StaticResource ErrorDark},
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    BorderColor="{AppThemeBinding Light={StaticResource ErrorDark},
                                               Dark={StaticResource Error}}"
-                Command="{Binding NavigateToExpiredCommand}"
-                Count="{Binding ExpiredCount}"
-                CountColor="{AppThemeBinding Light={StaticResource ErrorDark},
+                    Command="{Binding NavigateToExpiredCommand}"
+                    Count="{Binding ExpiredCount}"
+                    CountColor="{AppThemeBinding Light={StaticResource ErrorDark},
                                              Dark={StaticResource Error}}"
-                Icon="{StaticResource IconError}"
-                IconColor="{AppThemeBinding Light={StaticResource ErrorDark},
+                    Icon="{StaticResource IconError}"
+                    IconColor="{AppThemeBinding Light={StaticResource ErrorDark},
                                             Dark={StaticResource Error}}"
-                IsLoading="{Binding IsLoading}"
-                Text="{x:Static AppResources.Expired}"
-                TextColor="{AppThemeBinding Light={StaticResource PrimaryLightDark},
+                    IsLoading="{Binding IsLoading}"
+                    Text="{x:Static AppResources.Expired}"
+                    TextColor="{AppThemeBinding Light={StaticResource PrimaryLightDark},
                                             Dark={StaticResource PrimaryDarkLightest}}" />
 
             <SfShimmer
-                Grid.Row="2"
-                Grid.ColumnSpan="2"
-                IsActive="{Binding IsLoading}"
-                Type="CirclePersona">
+                    Grid.Row="2"
+                    Grid.ColumnSpan="2"
+                    IsActive="{Binding IsLoading}"
+                    Type="CirclePersona">
                 <Border
-                    BackgroundColor="{AppThemeBinding Light={StaticResource White},
+                        BackgroundColor="{AppThemeBinding Light={StaticResource White},
                                                       Dark={StaticResource PrimaryDarkDark}}"
-                    StrokeShape="RoundRectangle 16"
-                    StrokeThickness="0">
+                        StrokeShape="RoundRectangle 16"
+                        StrokeThickness="0">
                     <Border.Shadow>
                         <Shadow
-                            Brush="{AppThemeBinding Light={StaticResource PrimaryLightDark},
+                                Brush="{AppThemeBinding Light={StaticResource PrimaryLightDark},
                                                     Dark={StaticResource Gray950}}"
-                            Opacity="0.2"
-                            Radius="4"
-                            Offset="0,4" />
+                                Opacity="0.2"
+                                Radius="4"
+                                Offset="0,4" />
                     </Border.Shadow>
                     <SfCircularChart>
                         <SfCircularChart.Legend>
                             <ChartLegend Placement="Right" />
                         </SfCircularChart.Legend>
                         <DoughnutSeries
-                            ItemsSource="{Binding ConditionsWithCount}"
-                            XBindingPath="Condition"
-                            YBindingPath="Count" />
+                                ItemsSource="{Binding ConditionsWithCount}"
+                                XBindingPath="Condition"
+                                YBindingPath="Count" />
                     </SfCircularChart>
                 </Border>
             </SfShimmer>
             <!--  Überschrift für Lagerorte  -->
             <Label
-                Grid.Row="3"
-                Grid.ColumnSpan="2"
-                FontSize="{StaticResource SizeL}"
-                StyleClass="mt-xs"
-                Text="{x:Static AppResources.MyStorageLocations}" />
+                    Grid.Row="3"
+                    Grid.ColumnSpan="2"
+                    FontSize="{StaticResource SizeL}"
+                    StyleClass="mt-xs"
+                    Text="{x:Static AppResources.MyStorageLocations}" />
             <!--  Platzhalter für Lagerorte  -->
             <VerticalStackLayout
-                Grid.Row="4"
-                Grid.ColumnSpan="2"
-                Padding="2"
-                BindableLayout.ItemsSource="{Binding StorageLocations}"
-                Spacing="{StaticResource SizeXS}">
+                    Grid.Row="4"
+                    Grid.ColumnSpan="2"
+                    Padding="2"
+                    BindableLayout.ItemsSource="{Binding StorageLocations}"
+                    Spacing="{StaticResource SizeXS}">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate x:DataType="StorageLocationWithItemCount">
-                        <SfShimmer IsActive="{Binding Source={RelativeSource AncestorType={x:Type MainViewModel}}, Path=IsLoading, x:DataType=MainViewModel}">
+                        <SfShimmer IsActive="{Binding Source={RelativeSource AncestorType={x:Type MainViewModel}}, Path=IsLoading}">
                             <!--  Darstellung eines Rahmens mit abgerundeten Ecken  -->
                             <SfEffectsView TouchDownEffects="Ripple">
                                 <Border
-                                    BackgroundColor="{AppThemeBinding Light={StaticResource White},
+                                        BackgroundColor="{AppThemeBinding Light={StaticResource White},
                                                                       Dark={StaticResource PrimaryDarkDark}}"
-                                    StrokeShape="RoundRectangle 16"
-                                    StrokeThickness="0">
+                                        StrokeShape="RoundRectangle 16"
+                                        StrokeThickness="0">
                                     <Border.GestureRecognizers>
                                         <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type MainViewModel}}, Path=NavigateToLocationCommand}" CommandParameter="{Binding Id}" />
                                     </Border.GestureRecognizers>
@@ -140,60 +168,60 @@
                                     -->
                                     <Border.Shadow>
                                         <Shadow
-                                            Brush="{AppThemeBinding Light={StaticResource PrimaryLightDark},
+                                                Brush="{AppThemeBinding Light={StaticResource PrimaryLightDark},
                                                                     Dark={StaticResource Gray950}}"
-                                            Opacity="0.2"
-                                            Radius="4"
-                                            Offset="0,4" />
+                                                Opacity="0.2"
+                                                Radius="4"
+                                                Offset="0,4" />
                                     </Border.Shadow>
                                     <!--  Grid mit zwei Zeilen und drei Spalten anlegen  -->
                                     <Grid
-                                        Padding="{StaticResource ThicknessXS}"
-                                        ColumnDefinitions="48, *, 24"
-                                        ColumnSpacing="{StaticResource SizeXS}"
-                                        RowDefinitions="24,24">
+                                            Padding="{StaticResource ThicknessXS}"
+                                            ColumnDefinitions="48, *, 24"
+                                            ColumnSpacing="{StaticResource SizeXS}"
+                                            RowDefinitions="24,24">
                                         <!--
                                             Platzhalterbild in der ersten Spalte, und beiden Zeilen,
                                             umgeben von einem hellblauen Kreis
                                         -->
                                         <Border
-                                            Grid.Row="0"
-                                            Grid.RowSpan="2"
-                                            Grid.Column="0"
-                                            BackgroundColor="{StaticResource PrimaryLightLight}"
-                                            Style="{StaticResource BorderCircle}">
+                                                Grid.Row="0"
+                                                Grid.RowSpan="2"
+                                                Grid.Column="0"
+                                                BackgroundColor="{StaticResource PrimaryLightLight}"
+                                                Style="{StaticResource BorderCircle}">
                                             <Label
-                                                FontFamily="MaterialSymbolsRounded"
-                                                FontSize="{StaticResource SizeL}"
-                                                HorizontalOptions="Center"
-                                                Text="{Binding Icon}"
-                                                TextColor="{StaticResource PrimaryLightDarkest}"
-                                                VerticalOptions="Center" />
+                                                    FontFamily="MaterialSymbolsRounded"
+                                                    FontSize="{StaticResource SizeL}"
+                                                    HorizontalOptions="Center"
+                                                    Text="{Binding Icon}"
+                                                    TextColor="{StaticResource PrimaryLightDarkest}"
+                                                    VerticalOptions="Center" />
                                         </Border>
                                         <!--  Anzeige des Lagerortnamens  -->
                                         <Label
-                                            Grid.Column="1"
-                                            StyleClass="bold"
-                                            Text="{Binding Name}"
-                                            TextColor="{AppThemeBinding Light={StaticResource PrimaryLightDarkest},
+                                                Grid.Column="1"
+                                                StyleClass="bold"
+                                                Text="{Binding Name}"
+                                                TextColor="{AppThemeBinding Light={StaticResource PrimaryLightDarkest},
                                                                         Dark={StaticResource White}}" />
                                         <!--  Anzeige der Anzahl der Einträge  -->
                                         <Label
-                                            Grid.Row="1"
-                                            Grid.Column="1"
-                                            Text="{Binding ItemCount, StringFormat={x:Static AppResources.XItems}}"
-                                            TextColor="{AppThemeBinding Light={StaticResource PrimaryLightDark},
+                                                Grid.Row="1"
+                                                Grid.Column="1"
+                                                Text="{Binding ItemCount, StringFormat={x:Static AppResources.XItems}}"
+                                                TextColor="{AppThemeBinding Light={StaticResource PrimaryLightDark},
                                                                         Dark={StaticResource PrimaryDarkLightest}}" />
 
                                         <!--  Darstellung eines einfachen Guillemet ›  -->
                                         <Label
-                                            Grid.RowSpan="2"
-                                            Grid.Column="2"
-                                            FontSize="{StaticResource SizeXL}"
-                                            HorizontalOptions="End"
-                                            StyleClass="mt-xxs"
-                                            Text="›"
-                                            TextColor="{AppThemeBinding Light={StaticResource PrimaryLightDark},
+                                                Grid.RowSpan="2"
+                                                Grid.Column="2"
+                                                FontSize="{StaticResource SizeXL}"
+                                                HorizontalOptions="End"
+                                                StyleClass="mt-xxs"
+                                                Text="›"
+                                                TextColor="{AppThemeBinding Light={StaticResource PrimaryLightDark},
                                                                         Dark={StaticResource PrimaryDarkLightest}}" />
                                     </Grid>
                                 </Border>
@@ -207,9 +235,9 @@
                         <VerticalStackLayout Spacing="{StaticResource SizeXS}">
                             <Image Source="no_data.png" WidthRequest="150" />
                             <Label
-                                Style="{StaticResource SubHeadline}"
-                                StyleClass="mt-xs"
-                                Text="{x:Static AppResources.NoDataTitle}" />
+                                    Style="{StaticResource SubHeadline}"
+                                    StyleClass="mt-xs"
+                                    Text="{x:Static AppResources.NoDataTitle}" />
                             <Label Text="{x:Static AppResources.NoDataDescription}" />
                             <Label StyleClass="mt-xs, bold" Text="{x:Static AppResources.GetStarted}" />
                             <Label StyleClass="LinkLabel" Text="{x:Static AppResources.StartWithSuggestedLocations}">
@@ -231,15 +259,38 @@
                 </BindableLayout.EmptyViewTemplate>
             </VerticalStackLayout>
             <Button
-                Grid.Row="5"
-                Grid.Column="0"
-                Command="{Binding NavigateToAddItemCommand}"
-                Text="{x:Static AppResources.AddEntry}" />
+                    Grid.Row="5"
+                    Grid.Column="0"
+                    Command="{Binding NavigateToAddItemCommand}"
+                    Text="{x:Static AppResources.AddEntry}" />
             <Button
-                Grid.Row="5"
-                Grid.Column="1"
-                Style="{StaticResource SecondaryButton}"
-                Text="{x:Static AppResources.CreateNewLocation}" />
+                    Grid.Row="5"
+                    Grid.Column="1"
+                    Style="{StaticResource SecondaryButton}"
+                    Text="{x:Static AppResources.CreateNewLocation}" />
+            <SfBottomSheet CollapseOnOverlayTap="True" Grid.Row="0" Grid.RowSpan="6" Grid.ColumnSpan="2"
+                       IsOpen="{Binding IsBottomSheetOpen}" 
+                       CornerRadius="15, 15, 0, 0"  ContentPadding="10"
+                           HalfExpandedRatio="{OnPlatform WinUI=0.5, MacCatalyst=0.43}" FullExpandedRatio="0.9"
+                           >
+                <SfBottomSheet.BottomSheetContent>
+                    <ScrollView>
+                    <Grid ColumnDefinitions="*, Auto">
+                        <md:MarkdownView MarkdownText="{Binding RecipeResult}"/>
+                        <Button Grid.Column="1"
+                       Text="X"
+                       Command="{Binding CloseBottomSheetCommand}"
+                       HorizontalOptions="End"
+                       VerticalOptions="Start" />
+                    </Grid>
+                    </ScrollView>
+                </SfBottomSheet.BottomSheetContent>
+            </SfBottomSheet>
         </Grid>
     </ScrollView>
+
+    <!-- Recipe Bottom Sheet -->
+
+
 </ContentPage>
+                       
